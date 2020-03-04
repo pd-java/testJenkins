@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pd.pdcmback.mapper.ComponentBackMenuRelateMapper">
+    <resultMap id="BaseResultMap" type="com.pd.pdcmback.entity.ComponentBackMenuRelate">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="father_id" property="fatherId" jdbcType="INTEGER"/>
+        <id column="son_id" property="sonId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="selectBackMenuRelatesByFatherId" resultMap="BaseResultMap">
+        select * from com_back_menu_relate where father_id = #{fatherId}
+    </select>
+
+</mapper>

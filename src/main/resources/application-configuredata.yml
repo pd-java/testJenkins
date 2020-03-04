@@ -1,0 +1,9 @@
+spring:
+  security:
+    loginType: JSON
+component:
+  pictureUrl: http://localhost:8080/uploadComponents
+
+
+
+

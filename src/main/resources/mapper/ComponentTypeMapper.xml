@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pd.pdcmback.mapper.ComponentTypeMapper">
+    <resultMap id="BaseResultMap" type="com.pd.pdcmback.entity.ComponentType">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="type_name" property="typeName" jdbcType="VARCHAR"/>
+        <id column="father_id" property="fatherId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="getComponentTypesAll" resultMap="BaseResultMap">
+        select * from component_type
+    </select>
+
+    <select id="selectComponentTypeByTypeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select * from component_type where id = #{componentId}
+    </select>
+
+    <insert id="insertComponentRelatedType" keyProperty="id" useGeneratedKeys="true" parameterType="Map">
+        insert into
+            component_related_type(component_id, component_type_id)
+        values
+            (#{componentId}, #{componentTypeId})
+    </insert>
+
+</mapper>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pd.pdcmback.mapper.ComponentMapper">
+    <resultMap id="BaseResultMap" type="com.pd.pdcmback.entity.Component">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="component_name" property="componentName" jdbcType="VARCHAR"/>
+        <result column="component_uuid_name" property="componentUuidName" jdbcType="VARCHAR"/>
+        <result column="component_type" property="componentType" jdbcType="VARCHAR"/>
+        <result column="component_describe" property="componentDescribe" jdbcType="VARCHAR"/>
+        <result column="component_creator" property="componentCreator" jdbcType="VARCHAR"/>
+        <result column="component_creat_date" property="componentCreatDate" jdbcType="VARCHAR"/>
+        <result column="compontent_picture" property="compontenPicture" jdbcType="VARCHAR"/>
+        <result column="component_status" property="componentStatus" jdbcType="BIT"/>
+        <result column="component_enabled" property="componentEnabled" jdbcType="BIT"/>
+        <result column="component_modify_date" property="componentModifyDate" jdbcType="VARCHAR"/>
+        <result column="component_download_times" property="componentDownloadTimes" jdbcType="INTEGER"/>
+        <result column="component_browse_times" property="componentBrowseTimes" jdbcType="INTEGER"/>
+        <result column="component_prefer_times" property="componentPreferTimes" jdbcType="INTEGER"/>
+        <result column="component_exhibition_address" property="componentExhibitionAddress" jdbcType="VARCHAR"/>
+        <result column="component_download_address" property="componentDownloadAddress" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="ComponentRelatedType" type="com.pd.pdcmback.entity.Component" extends="BaseResultMap">
+        <collection property="componentTypes" ofType="com.pd.pdcmback.entity.ComponentType">
+            <id column="id" property="id"  jdbcType="INTEGER"/>
+            <result column="type_name" property="typeName"  jdbcType="VARCHAR"/>
+            <result column="father_id" property="fatherId"  jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectComponentAll" resultMap="BaseResultMap">
+        select * from component
+    </select>
+
+    <select id="selectComponentById" resultMap="BaseResultMap">
+        select * from component where id = #{id}
+    </select>
+
+    <select id="selectComponentByUuid" resultMap="BaseResultMap">
+        select * from component where component_uuid_name = #{componentUuid}
+    </select>
+
+    <insert id="insertComponent" keyProperty="id" useGeneratedKeys="true" parameterType="Map">
+        insert into
+         component(component_name,component_describe)
+        values
+         (#{componentName}, #{componentDescribe})
+    </insert>
+
+    <update id="insertComponentType" parameterType="Map">
+        update
+            component
+        set
+            component_type = #{componentType}
+        where
+            id = #{componentId}
+    </update>
+
+    <update id="insertComponentPictureAndUuid" parameterType="Map">
+        update
+            component
+        set
+            component_uuid_name = #{componentUuid},
+            compontent_picture = #{pictureUrl}
+        where
+            id = #{componentId}
+    </update>
+
+    <update id="insertComponentExhibitionAndDownloadAddress" parameterType="Map">
+        update
+            component
+        set
+            component_exhibition_address = #{componentExhibitionAddress},
+            component_download_address = #{componentDownloadAddress}
+        where
+            id = #{componentId}
+    </update>
+
+    <!--<insert id="insertUser" keyProperty="id" useGeneratedKeys="true" parameterType="com.pd.pdcmback.entity.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="sex != null">
+                sex ,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="job != null">
+                job,
+            </if>
+            <if test="enabled != null">
+                enabled,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="job != null">
+                #{job,jdbcType=VARCHAR},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>-->
+
+    <!--<insert id="insertSelective" parameterType="org.javaboy.vhr.model.Hr">
+        insert into hr
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="telephone != null">
+                telephone,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="enabled != null">
+                enabled,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="userface != null">
+                userface,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=CHAR},
+            </if>
+            <if test="telephone != null">
+                #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=BIT},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="userface != null">
+                #{userface,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>-->
+    <!--<update id="updateByPrimaryKeySelective" parameterType="org.javaboy.vhr.model.Hr">
+        update hr
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=CHAR},
+            </if>
+            <if test="telephone != null">
+                telephone = #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled,jdbcType=BIT},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="userface != null">
+                userface = #{userface,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>-->
+</mapper>
