@@ -92,4 +92,15 @@ public class UserController {
         Component component = componentService.selectComponentByUuid(componentUuid);
         return AjaxResponse.getComponentByUuidSuccess(component);
     }
+
+    @GetMapping(value = "/getComponentByCheckedComponentType",produces = {"application/json;charset=UTF-8"})
+    public AjaxResponse uploadComponent(@RequestParam(value = "checkedComponentType", defaultValue = "") String checkedComponentType,
+                                        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                        @RequestParam(value = "pageSize", defaultValue = "4") Integer pageSize) {
+        System.out.println("checkedComponentType= "+checkedComponentType);
+        PageInfo<Component> componentPageInfo = componentService.selectComponentBycheckedComponentType(checkedComponentType, pageNum, pageSize);
+        return AjaxResponse.getComponentByCheckedComponentTypeSuccess(componentPageInfo);
+    }
+
+
 }

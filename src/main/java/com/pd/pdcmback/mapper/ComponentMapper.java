@@ -27,4 +27,6 @@ public interface ComponentMapper {
     Integer insertComponentType(Map<String,Object> map);
 
     Integer insertComponentExhibitionAndDownloadAddress (Map<String, Object> map);
+
+    List<Component> selectComponentBycheckedComponentType(String checkedComponentType);
 }

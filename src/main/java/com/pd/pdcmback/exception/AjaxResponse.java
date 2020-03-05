@@ -124,6 +124,15 @@ public class AjaxResponse {
         return ajaxResponse;
     }
 
+    public static AjaxResponse getComponentByCheckedComponentTypeSuccess(PageInfo<Component> componentPageInfo){
+        AjaxResponse ajaxResponse = new AjaxResponse();
+        ajaxResponse.setCode(002);
+        ajaxResponse.setIssuccess(true);
+        ajaxResponse.setMessage("通过所选类别获取组件成功");
+        ajaxResponse.setData(componentPageInfo);
+        return ajaxResponse;
+    }
+
     public static AjaxResponse error(){
         AjaxResponse ajaxResponse = new AjaxResponse();
         ajaxResponse.setCode(199);

@@ -3,6 +3,7 @@ package com.pd.pdcmback.service;
 import com.github.pagehelper.PageInfo;
 import com.pd.pdcmback.entity.Component;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -25,4 +26,6 @@ public interface ComponentService {
     public Integer insertComponentType(Map<String, Object> map);
 
     public Integer insertComponentExhibitionAndDownloadAddress (Map<String, Object> map);
+
+    public PageInfo<Component> selectComponentBycheckedComponentType(String checkedComponentType, int pageNum, int pageSize);
 }

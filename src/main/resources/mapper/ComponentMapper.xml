@@ -39,6 +39,10 @@
         select * from component where component_uuid_name = #{componentUuid}
     </select>
 
+    <select id="selectComponentBycheckedComponentType" resultMap="BaseResultMap">
+        select * from component where component_type = #{checkedComponentType}
+    </select>
+
     <insert id="insertComponent" keyProperty="id" useGeneratedKeys="true" parameterType="Map">
         insert into
          component(component_name,component_describe)

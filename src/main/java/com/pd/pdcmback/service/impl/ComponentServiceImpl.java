@@ -71,5 +71,13 @@ public class ComponentServiceImpl implements ComponentService {
         return componentMapper.insertComponentExhibitionAndDownloadAddress(map);
     }
 
+    @Override
+    public PageInfo<Component> selectComponentBycheckedComponentType(String checkedComponentType, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Component> blogList = componentMapper.selectComponentBycheckedComponentType(checkedComponentType);
+        PageInfo<Component> pageInfo = new PageInfo<Component>(blogList);
+        return pageInfo;
+    }
+
 
 }
