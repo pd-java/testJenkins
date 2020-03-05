@@ -4,7 +4,10 @@
     <resultMap id="BaseResultMap" type="com.pd.pdcmback.entity.ComponentType">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <id column="type_name" property="typeName" jdbcType="VARCHAR"/>
-        <id column="father_id" property="fatherId" jdbcType="INTEGER"/>
+        <id column="type_level" property="typeLevel" jdbcType="INTEGER"/>
+        <id column="type_creat_time" property="typeCreatTime" jdbcType="VARCHAR"/>
+        <id column="type_creator" property="typeCreator" jdbcType="VARCHAR"/>
+        <id column="type_status" property="typeStatus" jdbcType="BIT"/>
     </resultMap>
 
     <select id="getComponentTypesAll" resultMap="BaseResultMap">
