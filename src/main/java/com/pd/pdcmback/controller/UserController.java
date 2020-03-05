@@ -6,6 +6,7 @@ import com.pd.pdcmback.entity.ComponentType;
 import com.pd.pdcmback.entity.User;
 import com.pd.pdcmback.exception.AjaxResponse;
 import com.pd.pdcmback.service.ComponentService;
+import com.pd.pdcmback.service.ComponentTypeService;
 import com.pd.pdcmback.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,9 @@ public class UserController {
     @Autowired
     private ComponentService componentService;
 
+    @Autowired
+    private ComponentTypeService componentTypeService;
+
     //@RequestMapping(value = "/",produces = {"application/json;charset=UTF-8"})
     @GetMapping(value = "/",produces = {"application/json;charset=UTF-8"})
     public AjaxResponse home(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize", defaultValue = "4") Integer pageSize){
@@ -41,8 +45,9 @@ public class UserController {
     }
 
     //获取组件所有类别（递归）
-    public AjaxResponse getNavBar(){
-        List<ComponentType> componentTypes = new ArrayList<>();
+    @RequestMapping("/getComponentTypesAll")
+    public AjaxResponse getComponentTypesAll(){
+        List<ComponentType> componentTypes = componentTypeService.selectComponentTypeHead();
         return AjaxResponse.getNavBarSuccess(componentTypes);
     }
 

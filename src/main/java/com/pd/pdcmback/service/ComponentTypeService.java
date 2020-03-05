@@ -13,4 +13,6 @@ import java.util.List;
 public interface ComponentTypeService {
 
     public List<ComponentType> getComponentTypesAll();
+
+    public List<ComponentType> selectComponentTypeHead();
 }

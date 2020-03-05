@@ -18,6 +18,10 @@ public interface ComponentTypeMapper {
 
     List<ComponentType> getComponentTypesAll();
 
+    List<ComponentType> selectComponentTypeHead();
+
+    ComponentType selectComponentTypeById(Integer sonId);
+
     ComponentType selectComponentTypeByTypeId(Integer componentId);
 
     Integer insertComponentRelatedType(Map<String, Object> map);

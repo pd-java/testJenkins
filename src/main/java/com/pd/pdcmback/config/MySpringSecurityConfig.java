@@ -50,7 +50,7 @@ public class MySpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()//
-                .antMatchers("/","/login","/uploadComponent","/getComponentType","/register","/import","/getBackMenu","/downloadComponent","/getComponentByUuid").permitAll()
+                .antMatchers("/","/login","/getComponentTypesAll","/uploadComponent","/getComponentType","/register","/import","/getBackMenu","/downloadComponent","/getComponentByUuid").permitAll()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/admin").hasAuthority("ROLE_ADMIN")

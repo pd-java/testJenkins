@@ -14,6 +14,14 @@
         select * from component_type
     </select>
 
+    <select id="selectComponentTypeHead" resultMap="BaseResultMap">
+        select * from component_type where type_level = '1'
+    </select>
+
+    <select id="selectComponentTypeById" resultMap="BaseResultMap">
+        select * from component_type where id = #{sonId}
+    </select>
+
     <select id="selectComponentTypeByTypeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select * from component_type where id = #{componentId}
     </select>
