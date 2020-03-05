@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pd.pdcmback.mapper.ComponentTypeLevelMapper">
+    <resultMap id="BaseResultMap" type="com.pd.pdcmback.entity.ComponentTypeLevel">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="father_id" property="fatherId" jdbcType="INTEGER"/>
+        <id column="son_id" property="sonId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="selectComponentTypeLevelByFatherId" resultMap="BaseResultMap">
+        select * from component_type_level where father_id = #{fatherId}
+    </select>
+
+</mapper>
