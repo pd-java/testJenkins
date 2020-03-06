@@ -151,6 +151,15 @@ public class AjaxResponse {
         return ajaxResponse;
     }
 
+    public static AjaxResponse getPersonalComponentSuccess(List<Component> components){
+        AjaxResponse ajaxResponse = new AjaxResponse();
+        ajaxResponse.setCode(003);
+        ajaxResponse.setIssuccess(true);
+        ajaxResponse.setMessage("获取个人组件成功");
+        ajaxResponse.setData(components);
+        return ajaxResponse;
+    }
+
     public static AjaxResponse error(){
         AjaxResponse ajaxResponse = new AjaxResponse();
         ajaxResponse.setCode(199);

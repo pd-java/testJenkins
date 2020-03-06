@@ -11,7 +11,15 @@
     </resultMap>
 
     <select id="getComponentTypesAll" resultMap="BaseResultMap">
-        select * from component_type
+        select
+            *
+        from
+        component_type
+        where
+            id
+        not in (
+            select distinct(father_id) from component_type_level
+        )
     </select>
 
     <select id="selectComponentTypeHead" resultMap="BaseResultMap">

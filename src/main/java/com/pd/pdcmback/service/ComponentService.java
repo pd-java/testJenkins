@@ -33,4 +33,8 @@ public interface ComponentService {
 
     public PageInfo<Component> selectComponentBySearchKeyWords(String searchKeyWords, int pageNum, int pageSize);
 
+    public List<Component> selectPersonalComponent();
+
+
+
 }

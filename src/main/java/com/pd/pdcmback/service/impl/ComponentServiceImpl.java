@@ -96,5 +96,10 @@ public class ComponentServiceImpl implements ComponentService {
         return pageInfo;
     }
 
+    @Override
+    public List<Component> selectPersonalComponent() {
+        return componentMapper.selectPersonalComponent();
+    }
+
 
 }

@@ -62,4 +62,10 @@ public class PersonalCenterController {
         Integer insertComponentType = componentService.insertComponentType(map);
         return AjaxResponse.uploadComponentFirstSuccess(map);
     }
+
+    @GetMapping(value = "/getPersonalComponent")
+    public AjaxResponse getPersonalComponent(){
+        List<Component> components = componentService.selectPersonalComponent();
+        return AjaxResponse.getPersonalComponentSuccess(components);
+    }
 }
