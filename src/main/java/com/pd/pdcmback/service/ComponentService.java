@@ -31,4 +31,6 @@ public interface ComponentService {
 
     public List<Component> selectHotComponentByPreferTimes();
 
+    public PageInfo<Component> selectComponentBySearchKeyWords(String searchKeyWords, int pageNum, int pageSize);
+
 }

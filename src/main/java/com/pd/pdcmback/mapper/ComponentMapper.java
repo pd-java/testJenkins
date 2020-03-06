@@ -31,4 +31,6 @@ public interface ComponentMapper {
     List<Component> selectComponentBycheckedComponentType(String checkedComponentType);
 
     List<Component> selectHotComponentByPreferTimes(Integer amount);
+
+    List<Component> selectComponentBySearchKeyWords(String searchKeyWords);
 }

@@ -142,6 +142,15 @@ public class AjaxResponse {
         return ajaxResponse;
     }
 
+    public static AjaxResponse getComponentBySearchKeyWordsSuccess(PageInfo<Component> componentPageInfo){
+        AjaxResponse ajaxResponse = new AjaxResponse();
+        ajaxResponse.setCode(003);
+        ajaxResponse.setIssuccess(true);
+        ajaxResponse.setMessage("获取最热组件成功");
+        ajaxResponse.setData(componentPageInfo);
+        return ajaxResponse;
+    }
+
     public static AjaxResponse error(){
         AjaxResponse ajaxResponse = new AjaxResponse();
         ajaxResponse.setCode(199);

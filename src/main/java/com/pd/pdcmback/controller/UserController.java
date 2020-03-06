@@ -93,7 +93,7 @@ public class UserController {
         return AjaxResponse.getComponentByUuidSuccess(component);
     }
 
-    @GetMapping(value = "/getComponentByCheckedComponentType",produces = {"application/json;charset=UTF-8"})
+    @GetMapping(value = "/getComponentByCheckedComponentType")
     public AjaxResponse uploadComponent(@RequestParam(value = "checkedComponentType", defaultValue = "") String checkedComponentType,
                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                         @RequestParam(value = "pageSize", defaultValue = "4") Integer pageSize) {
@@ -106,6 +106,14 @@ public class UserController {
     public AjaxResponse getHotComponents(){
         List<Component> components = componentService.selectHotComponentByPreferTimes();
         return AjaxResponse.getHotComponentsSuccess(components);
+    }
+
+    @GetMapping("/getComponentBySearchKeyWords")
+    public AjaxResponse getComponentBySearchKeyWords(@RequestParam(value = "searchKeyWords", defaultValue = "") String searchKeyWords,
+                                                     @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                                     @RequestParam(value = "pageSize", defaultValue = "4") Integer pageSize){
+        PageInfo<Component> components = componentService.selectComponentBySearchKeyWords(searchKeyWords, pageNum, pageSize);
+        return AjaxResponse.getComponentBySearchKeyWordsSuccess(components);
     }
 
 

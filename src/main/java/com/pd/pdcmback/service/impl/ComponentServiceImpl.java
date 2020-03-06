@@ -88,5 +88,13 @@ public class ComponentServiceImpl implements ComponentService {
         return componentMapper.selectHotComponentByPreferTimes(amount);
     }
 
+    @Override
+    public PageInfo<Component> selectComponentBySearchKeyWords(String searchKeyWords, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Component> blogList = componentMapper.selectComponentBySearchKeyWords(searchKeyWords);
+        PageInfo<Component> pageInfo = new PageInfo<Component>(blogList);
+        return pageInfo;
+    }
+
 
 }
