@@ -29,4 +29,6 @@ public interface ComponentMapper {
     Integer insertComponentExhibitionAndDownloadAddress (Map<String, Object> map);
 
     List<Component> selectComponentBycheckedComponentType(String checkedComponentType);
+
+    List<Component> selectHotComponentByPreferTimes(Integer amount);
 }

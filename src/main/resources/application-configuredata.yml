@@ -4,6 +4,9 @@ spring:
 component:
   pictureUrl: http://localhost:8080/uploadComponents
 
+homePage:
+  HotComponentAmount: 3
+
 
 
 

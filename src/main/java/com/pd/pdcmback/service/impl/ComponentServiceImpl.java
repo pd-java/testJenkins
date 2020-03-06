@@ -8,6 +8,7 @@ import com.pd.pdcmback.mapper.ComponentMapper;
 import com.pd.pdcmback.mapper.ComponentTypeMapper;
 import com.pd.pdcmback.service.ComponentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,9 @@ import java.util.Map;
  */
 @Service
 public class ComponentServiceImpl implements ComponentService {
+
+    @Value("${homePage.HotComponentAmount}")
+    private Integer amount;
 
     @Autowired
     private ComponentMapper componentMapper;
@@ -77,6 +81,11 @@ public class ComponentServiceImpl implements ComponentService {
         List<Component> blogList = componentMapper.selectComponentBycheckedComponentType(checkedComponentType);
         PageInfo<Component> pageInfo = new PageInfo<Component>(blogList);
         return pageInfo;
+    }
+
+    @Override
+    public List<Component> selectHotComponentByPreferTimes() {
+        return componentMapper.selectHotComponentByPreferTimes(amount);
     }
 
 

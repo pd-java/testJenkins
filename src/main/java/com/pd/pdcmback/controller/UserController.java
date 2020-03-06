@@ -102,5 +102,11 @@ public class UserController {
         return AjaxResponse.getComponentByCheckedComponentTypeSuccess(componentPageInfo);
     }
 
+    @GetMapping("/getHotComponents")
+    public AjaxResponse getHotComponents(){
+        List<Component> components = componentService.selectHotComponentByPreferTimes();
+        return AjaxResponse.getHotComponentsSuccess(components);
+    }
+
 
 }

@@ -28,4 +28,7 @@ public interface ComponentService {
     public Integer insertComponentExhibitionAndDownloadAddress (Map<String, Object> map);
 
     public PageInfo<Component> selectComponentBycheckedComponentType(String checkedComponentType, int pageNum, int pageSize);
+
+    public List<Component> selectHotComponentByPreferTimes();
+
 }

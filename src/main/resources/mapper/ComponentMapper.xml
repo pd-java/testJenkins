@@ -43,6 +43,10 @@
         select * from component where component_type = #{checkedComponentType}
     </select>
 
+    <select id="selectHotComponentByPreferTimes" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select* from component order by component_prefer_times desc limit #{amount}
+    </select>
+
     <insert id="insertComponent" keyProperty="id" useGeneratedKeys="true" parameterType="Map">
         insert into
          component(component_name,component_describe)
