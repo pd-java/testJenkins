@@ -10,6 +10,7 @@ import com.pd.pdcmback.service.ComponentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +67,18 @@ public class PersonalCenterController {
     @GetMapping(value = "/getPersonalComponent")
     public AjaxResponse getPersonalComponent(){
         List<Component> components = componentService.selectPersonalComponent();
+        return AjaxResponse.getPersonalComponentSuccess(components);
+    }
+
+    @GetMapping(value = "/setPersonalComponentDisable")
+    public AjaxResponse setPersonalComponentDisable(@RequestParam(value = "comonentId", defaultValue = "0") Integer componentId,@RequestParam(value = "able", defaultValue = "") String able){
+        System.out.println(" setdisable componentId ="+componentId);
+        List<Component> components = new ArrayList<>();
+        if(componentId !=0 && able != ""){
+            components = componentService.updatePersonalComponentDisable(componentId,able);
+        } else {
+            components = componentService.selectPersonalComponent();
+        }
         return AjaxResponse.getPersonalComponentSuccess(components);
     }
 }

@@ -35,6 +35,8 @@ public interface ComponentService {
 
     public List<Component> selectPersonalComponent();
 
+    List<Component> updatePersonalComponentDisable(Integer componentId, String able);
+
 
 
 }

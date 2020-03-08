@@ -35,4 +35,6 @@ public interface ComponentMapper {
     List<Component> selectComponentBySearchKeyWords(String searchKeyWords);
 
     List<Component> selectPersonalComponent();
+
+    Integer updatePersonalComponentDisable(Map<String,Object> map);
 }

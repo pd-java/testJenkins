@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -98,6 +99,20 @@ public class ComponentServiceImpl implements ComponentService {
 
     @Override
     public List<Component> selectPersonalComponent() {
+        return componentMapper.selectPersonalComponent();
+    }
+
+    @Override
+    public List<Component> updatePersonalComponentDisable(Integer componentId, String able) {
+        Integer isable = able.equals("true") ? 0: 1;
+        System.out.println("able= " + able);
+        System.out.println("isable= " + isable);
+        Map<String, Object> map = new HashMap<>();
+        map.put("componentId",componentId);
+        map.put("isable",isable);
+        //更新数据，设置指定组件不可用
+        componentMapper.updatePersonalComponentDisable(map);
+        //重新查询出组件
         return componentMapper.selectPersonalComponent();
     }
 

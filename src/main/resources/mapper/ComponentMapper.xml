@@ -55,6 +55,15 @@
         select* from component where component_name like #{searchKeyWords} '%' or component_type like #{searchKeyWords} '%'
     </select>
 
+    <update id="updatePersonalComponentDisable" parameterType="Map">
+        update
+            component
+        set
+            component_enabled = #{isable}
+        where
+            id = #{componentId}
+    </update>
+
     <insert id="insertComponent" keyProperty="id" useGeneratedKeys="true" parameterType="Map">
         insert into
          component(component_name,component_describe)
