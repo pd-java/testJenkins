@@ -160,6 +160,14 @@ public class AjaxResponse {
         return ajaxResponse;
     }
 
+    public static AjaxResponse updateComponentSuccess(){
+        AjaxResponse ajaxResponse = new AjaxResponse();
+        ajaxResponse.setCode(004);
+        ajaxResponse.setIssuccess(true);
+        ajaxResponse.setMessage("更新个人组件初步成功");
+        return ajaxResponse;
+    }
+
     public static AjaxResponse error(){
         AjaxResponse ajaxResponse = new AjaxResponse();
         ajaxResponse.setCode(199);

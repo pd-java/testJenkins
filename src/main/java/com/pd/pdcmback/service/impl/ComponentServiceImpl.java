@@ -7,6 +7,7 @@ import com.pd.pdcmback.entity.ComponentType;
 import com.pd.pdcmback.mapper.ComponentMapper;
 import com.pd.pdcmback.mapper.ComponentTypeMapper;
 import com.pd.pdcmback.service.ComponentService;
+import com.pd.pdcmback.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ public class ComponentServiceImpl implements ComponentService {
 
     @Value("${homePage.HotComponentAmount}")
     private Integer amount;
+
+    @Value("${component.pictureDiskAddress}")
+    private String pictureDiskAddress;
 
     @Autowired
     private ComponentMapper componentMapper;
@@ -115,6 +119,45 @@ public class ComponentServiceImpl implements ComponentService {
         //重新查询出组件
         return componentMapper.selectPersonalComponent();
     }
+
+    @Override
+    public List<Component> deleteComponentByComponentId(Integer componentId) {
+        //通过组件id删除组件
+        componentMapper.deleteComponentByComponentId(componentId);
+        //重新查询出组件
+        return componentMapper.selectPersonalComponent();
+    }
+
+    @Override
+    public Integer updateComponent(Map<String, Object> map) {
+        //更新组件名和描述
+        componentMapper.updateComponent(map);
+        //如果用户没有改变组件类型
+        if((Integer) map.get("componentTypeId") == 0){
+            return 1;
+        }
+        //更新组件类型
+        return insertComponentType(map);
+    }
+
+    @Override
+    public boolean deleteComponentPictureOrFile(Integer componentId, String compontentPictureOrDownLoadAddress, String ways) {
+        String format[] = compontentPictureOrDownLoadAddress.split("/");
+        int formatLength = format.length;
+        String pictureName = "";
+        for(int i = 4; i > 0; i--){
+            pictureName = pictureName+ "/" + format[formatLength-i];
+        }
+        String pictureAddress = pictureDiskAddress + pictureName;
+        if(ways == "file"){
+            FileUtils.deleteAnyone(pictureAddress);
+            FileUtils.deleteAnyone(pictureDiskAddress + pictureName.split("\\.")[0]);
+        } else {
+            FileUtils.deleteAnyone(pictureAddress);
+        }
+        return false;
+    }
+
 
 
 }

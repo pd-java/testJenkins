@@ -37,4 +37,8 @@ public interface ComponentMapper {
     List<Component> selectPersonalComponent();
 
     Integer updatePersonalComponentDisable(Map<String,Object> map);
+
+    Integer deleteComponentByComponentId(Integer componentId);
+
+    Integer updateComponent(Map<String,Object> map);
 }

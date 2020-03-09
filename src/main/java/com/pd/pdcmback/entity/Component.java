@@ -25,7 +25,7 @@ public class Component {
 
     private String componentCreatDate;     //组件创建日期
 
-    private String compontenPicture;     //组件图片（路径）
+    private String componentPicture;     //组件图片（路径）
 
     private boolean componentStatus;     //组件状态
 

@@ -35,8 +35,12 @@ public interface ComponentService {
 
     public List<Component> selectPersonalComponent();
 
-    List<Component> updatePersonalComponentDisable(Integer componentId, String able);
+    public List<Component> updatePersonalComponentDisable(Integer componentId, String able);
 
+    public List<Component> deleteComponentByComponentId(Integer componentId);
 
+    public Integer updateComponent(Map<String,Object> map);
+
+    public boolean deleteComponentPictureOrFile(Integer componentId, String compontentPictureOrDownLoadAddress, String ways);
 
 }

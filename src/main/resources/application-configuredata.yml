@@ -3,6 +3,8 @@ spring:
     loginType: JSON
 component:
   pictureUrl: http://localhost:8080/uploadComponents
+  pictureDiskAddress: D:\SoftWare\Tomcat\tomcat8.5\apache-tomcat-8.5.49\webapps\uploadComponents
+  downLoadAddress: D:\SoftWare\Tomcat\tomcat8.5\apache-tomcat-8.5.49\webapps\uploadComponents
 
 homePage:
   HotComponentAmount: 3

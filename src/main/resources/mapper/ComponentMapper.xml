@@ -9,7 +9,7 @@
         <result column="component_describe" property="componentDescribe" jdbcType="VARCHAR"/>
         <result column="component_creator" property="componentCreator" jdbcType="VARCHAR"/>
         <result column="component_creat_date" property="componentCreatDate" jdbcType="VARCHAR"/>
-        <result column="compontent_picture" property="compontenPicture" jdbcType="VARCHAR"/>
+        <result column="compontent_picture" property="componentPicture" jdbcType="VARCHAR"/>
         <result column="component_status" property="componentStatus" jdbcType="BIT"/>
         <result column="component_enabled" property="componentEnabled" jdbcType="BIT"/>
         <result column="component_modify_date" property="componentModifyDate" jdbcType="VARCHAR"/>
@@ -99,6 +99,20 @@
         where
             id = #{componentId}
     </update>
+
+    <update id="updateComponent" parameterType="Map">
+        update
+            component
+        set
+            component_name = #{componentName},
+            component_describe = #{componentDescribe}
+        where
+            id = #{componentId}
+    </update>
+
+    <delete id="deleteComponentByComponentId" parameterType="java.lang.Integer">
+        delete from component where id = #{componentId}
+    </delete>
 
     <!--<insert id="insertUser" keyProperty="id" useGeneratedKeys="true" parameterType="com.pd.pdcmback.entity.User">
         insert into user
