@@ -2,6 +2,7 @@ package com.pd.pdcmback.config;
 
 import com.pd.pdcmback.auth.MyAccessDeniedHandler;
 import com.pd.pdcmback.auth.MyAuthenticationFailureHandler;
+import com.pd.pdcmback.auth.MyAuthenticationLogoutSuccessHandler;
 import com.pd.pdcmback.auth.MyAuthenticationSuccessHandler;
 import com.pd.pdcmback.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class MySpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
 
     @Resource
+    private MyAuthenticationLogoutSuccessHandler myAuthenticationLogoutSuccessHandler;
+
+    @Resource
     private MyAccessDeniedHandler myAccessDeniedHandler;
 
     @Bean
@@ -53,26 +57,32 @@ public class MySpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/","/deleteComponentFile","/deleteComponentPicture","/updateComponent","/deleteComponentByComponentId","/setPersonalComponentDisable","/getPersonalComponent","/getComponentBySearchKeyWords","/getHotComponents","/getComponentByCheckedComponentType","/login","/getComponentTypesAll","/uploadComponent","/getComponentType","/register","/import","/getBackMenu","/downloadComponent","/getComponentByUuid").permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/admin").hasAuthority("ROLE_ADMIN")
-                .and().authorizeRequests()
-                .antMatchers("/user").hasAuthority("ROLE_USER")
+                    .antMatchers("/admin").hasAuthority("ROLE_ADMIN")
                 .and()
                 .authorizeRequests()
-                .anyRequest()       //其它路径请求
-                .authenticated()    //需要登录才能访问
+                    .antMatchers("/user").hasAuthority("ROLE_USER")
+                .and()
+                .authorizeRequests()
+                    .anyRequest()       //其它路径请求
+                    .authenticated()    //需要登录才能访问
                 .and()
                 .exceptionHandling()    //没有权限时异常处理
-                .accessDeniedHandler(myAccessDeniedHandler)     //没有权限，就交给myAccessDeniedHandler处理
+                    .accessDeniedHandler(myAccessDeniedHandler)     //没有权限，就交给myAccessDeniedHandler处理
                 .and()
                 .cors()         //允许跨域
                 .and()
                 .formLogin()       //表单登录是session/cookie认证，另外一种是httpBasic利用HTTP头部进行认证
-                .loginPage("/api/login")    //为配合前端vue必须添加"/api"才能正常访问，所以由正常的"/login",改为"/api/login"
-                .usernameParameter("user")  //设置传过来的用户名的格式为“user: xxx”
-                .passwordParameter("pass")  //设置传过来的密码的格式为“pass: xxx”
-                .loginProcessingUrl("/mypost")  //设置登录请求的url
-                .successHandler(myAuthenticationSuccessHandler)    //登录成功控制
-                .failureHandler(myAuthenticationFailureHandler)     //登录失败控制
+                    .loginPage("/api/login")    //为配合前端vue必须添加"/api"才能正常访问，所以由正常的"/login",改为"/api/login"
+                    .usernameParameter("user")  //设置传过来的用户名的格式为“user: xxx”
+                    .passwordParameter("pass")  //设置传过来的密码的格式为“pass: xxx”
+                    .loginProcessingUrl("/mypost")  //设置登录请求的url
+                    .successHandler(myAuthenticationSuccessHandler)    //登录成功控制
+                    .failureHandler(myAuthenticationFailureHandler)     //登录失败控制
+                .and()
+                .logout()
+                    .logoutUrl("/quitLogin")
+                    .logoutSuccessHandler(myAuthenticationLogoutSuccessHandler)
+                    .deleteCookies("JSESSIONID")
                 .and()
                 .csrf()
                 .disable()
