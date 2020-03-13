@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pd.pdcmback.mapper.RoleWithUserMapper">
+    <resultMap id="BaseResultMap" type="com.pd.pdcmback.entity.RoleWithUser">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <id column="user_id" property="userId" jdbcType="INTEGER"/>
+    <id column="role_id" property="roleId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="insertUserWithUserRole" keyProperty="id" useGeneratedKeys="true" parameterType="Map">
+        insert into
+            role_user (
+                user_id,
+                role_id
+            )
+        values (
+                #{userId},
+                3             <!--默认赋予普通用户权限-->
+        )
+    </insert>
+</mapper>

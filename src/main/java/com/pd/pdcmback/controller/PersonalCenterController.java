@@ -7,6 +7,7 @@ import com.pd.pdcmback.exception.AjaxResponse;
 import com.pd.pdcmback.service.ComponentBackMenuService;
 import com.pd.pdcmback.service.ComponentService;
 import com.pd.pdcmback.service.ComponentTypeService;
+import com.pd.pdcmback.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,9 @@ public class PersonalCenterController {
 
     @Autowired
     private ComponentService componentService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/getBackMenu")
     public AjaxResponse getBackMenu(){
@@ -126,5 +130,25 @@ public class PersonalCenterController {
         String ways = "file";
         componentService.deleteComponentPictureOrFile(componentId,componentDownloadAddress,ways);
         return AjaxResponse.updateComponentSuccess();
+    }
+
+    @GetMapping(value = "/modifyPassword")
+    public AjaxResponse modifyPassword(@RequestParam String username,
+                                       @RequestParam String password,
+                                       @RequestParam String newPassword ){
+        System.out.println("username="+username);
+        System.out.println("password="+password);
+        System.out.println("newPassword="+newPassword);
+        Map<String,Object> map = new HashMap<>();
+        map.put("username",username);
+        map.put("password",password);
+        map.put("newPassword",newPassword);
+        boolean ismodified = userService.modifyPassword(map);
+        String msg = "修改密码失败";
+        if(ismodified){
+            msg = "修改密码成功";
+        }
+
+        return AjaxResponse.modifyPasswordSuccess(msg);
     }
 }

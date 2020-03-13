@@ -178,6 +178,14 @@ public class AjaxResponse {
         return ajaxResponse;
     }
 
+    public static AjaxResponse modifyPasswordSuccess(String msg){
+        AjaxResponse ajaxResponse = new AjaxResponse();
+        ajaxResponse.setCode(StatusCode.SUCCESS);
+        ajaxResponse.setIssuccess(true);
+        ajaxResponse.setMessage(msg);
+        return ajaxResponse;
+    }
+
     public static AjaxResponse error(){
         AjaxResponse ajaxResponse = new AjaxResponse();
         ajaxResponse.setCode(StatusCode.LOGIN_FAIL);

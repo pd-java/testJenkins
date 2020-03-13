@@ -67,9 +67,7 @@ public class UserController {
     public AjaxResponse register(@RequestBody User user){
         System.out.println("registing ing ing");
         if(user != null && user.getUsername() != null && user.getPassword() != null){
-            System.out.println("before insert user" + user);
             Integer count = userService.insertUser(user);
-            System.out.println("after insert user" + user + "count=" +count);
         }
         return AjaxResponse.registerSuccess();
     }
