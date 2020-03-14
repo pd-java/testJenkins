@@ -54,7 +54,7 @@ public class MySpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()//
-                .antMatchers("/","/modifyPassword","/quitLogin","/deleteComponentFile","/deleteComponentPicture","/updateComponent","/deleteComponentByComponentId","/setPersonalComponentDisable","/getPersonalComponent","/getComponentBySearchKeyWords","/getHotComponents","/getComponentByCheckedComponentType","/login","/getComponentTypesAll","/uploadComponent","/getComponentType","/register","/import","/getBackMenu","/downloadComponent","/getComponentByUuid").permitAll()
+                .antMatchers("/","/getUserPersonalData","/personalDataSetting","/modifyPassword","/quitLogin","/deleteComponentFile","/deleteComponentPicture","/updateComponent","/deleteComponentByComponentId","/setPersonalComponentDisable","/getPersonalComponent","/getComponentBySearchKeyWords","/getHotComponents","/getComponentByCheckedComponentType","/login","/getComponentTypesAll","/uploadComponent","/getComponentType","/register","/import","/getBackMenu","/downloadComponent","/getComponentByUuid").permitAll()
                 .and()
                 .authorizeRequests()
                     .antMatchers("/admin").hasAuthority("ROLE_ADMIN")

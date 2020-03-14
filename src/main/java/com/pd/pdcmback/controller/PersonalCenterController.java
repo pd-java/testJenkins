@@ -1,8 +1,6 @@
 package com.pd.pdcmback.controller;
 
-import com.pd.pdcmback.entity.Component;
-import com.pd.pdcmback.entity.ComponentBackMenu;
-import com.pd.pdcmback.entity.ComponentType;
+import com.pd.pdcmback.entity.*;
 import com.pd.pdcmback.exception.AjaxResponse;
 import com.pd.pdcmback.service.ComponentBackMenuService;
 import com.pd.pdcmback.service.ComponentService;
@@ -151,4 +149,22 @@ public class PersonalCenterController {
 
         return AjaxResponse.modifyPasswordSuccess(msg);
     }
+
+    @GetMapping(value = "/getUserPersonalData")
+    public AjaxResponse getUserPersonalData(@RequestParam String username){
+        UserCM userCM = userService.getUserPersonalData(username);
+        System.out.println("getUserPersonalData=");
+        System.out.println(userCM);
+        return AjaxResponse.getUserPersonalDataSuccess(userCM);
+    }
+
+
+    @GetMapping(value = "/personalDataSetting")
+    public AjaxResponse personalDataSetting(User user){
+        userService.updateUserPersonalData(user);
+        String msg = "个人资料设置成功";
+        return AjaxResponse.personalDataSettingSuccess(msg);
+    }
+
+
 }

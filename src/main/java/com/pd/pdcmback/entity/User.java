@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * @author pengdong
  * @date 2020/2/18 14:40
  */
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
 
     private Integer id;
 
@@ -32,6 +33,18 @@ public class User implements UserDetails {
     private String birth;
 
     private Boolean enabled;
+
+    private String name;
+
+    private String company;
+
+    private String education;
+
+    private String school;
+
+    private String workTime;
+
+    private String personalProfile;
 
     public Integer getId() {
         return id;
@@ -108,6 +121,58 @@ public class User implements UserDetails {
         return enabled;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getWorkTime() {
+        return workTime;
+    }
+
+    public void setWorkTime(String workTime) {
+        this.workTime = workTime;
+    }
+
+    public String getPersonalProfile() {
+        return personalProfile;
+    }
+
+    public void setPersonalProfile(String personalProfile) {
+        this.personalProfile = personalProfile;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
@@ -132,6 +197,7 @@ public class User implements UserDetails {
         return true;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
@@ -144,6 +210,12 @@ public class User implements UserDetails {
                 ", job='" + job + '\'' +
                 ", birth='" + birth + '\'' +
                 ", enabled=" + enabled +
+                ", name='" + name + '\'' +
+                ", company='" + company + '\'' +
+                ", education='" + education + '\'' +
+                ", school='" + school + '\'' +
+                ", workTime='" + workTime + '\'' +
+                ", personalProfile='" + personalProfile + '\'' +
                 '}';
     }
 }

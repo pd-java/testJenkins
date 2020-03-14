@@ -1,6 +1,7 @@
 package com.pd.pdcmback.service;
 
 import com.pd.pdcmback.entity.User;
+import com.pd.pdcmback.entity.UserCM;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.Map;
@@ -16,5 +17,9 @@ public interface UserService extends UserDetailsService {
     public Integer insertUser(User user);
 
     public boolean modifyPassword(Map map);
+
+    public Integer updateUserPersonalData(User user);
+
+    public UserCM getUserPersonalData(String username);
 
 }

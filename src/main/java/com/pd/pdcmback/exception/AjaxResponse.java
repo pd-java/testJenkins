@@ -1,9 +1,7 @@
 package com.pd.pdcmback.exception;
 
 import com.github.pagehelper.PageInfo;
-import com.pd.pdcmback.entity.Component;
-import com.pd.pdcmback.entity.ComponentBackMenu;
-import com.pd.pdcmback.entity.ComponentType;
+import com.pd.pdcmback.entity.*;
 import com.pd.pdcmback.util.StatusCode;
 import lombok.Data;
 
@@ -179,6 +177,23 @@ public class AjaxResponse {
     }
 
     public static AjaxResponse modifyPasswordSuccess(String msg){
+        AjaxResponse ajaxResponse = new AjaxResponse();
+        ajaxResponse.setCode(StatusCode.SUCCESS);
+        ajaxResponse.setIssuccess(true);
+        ajaxResponse.setMessage(msg);
+        return ajaxResponse;
+    }
+
+    public static AjaxResponse getUserPersonalDataSuccess(UserCM userCM){
+        AjaxResponse ajaxResponse = new AjaxResponse();
+        ajaxResponse.setCode(StatusCode.SUCCESS);
+        ajaxResponse.setIssuccess(true);
+        ajaxResponse.setMessage("获取用户资料成功");
+        ajaxResponse.setData(userCM);
+        return ajaxResponse;
+    }
+
+    public static AjaxResponse personalDataSettingSuccess(String msg){
         AjaxResponse ajaxResponse = new AjaxResponse();
         ajaxResponse.setCode(StatusCode.SUCCESS);
         ajaxResponse.setIssuccess(true);

@@ -1,6 +1,7 @@
 package com.pd.pdcmback.mapper;
 
 import com.pd.pdcmback.entity.User;
+import com.pd.pdcmback.entity.UserCM;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -23,4 +24,8 @@ public interface UserMapper {
 
     //修改用户密码
     Integer modifyUserPassword(Map map);
+
+    //更新用户个人资料
+    Integer updateUserPersonalData(User user);
+
 }

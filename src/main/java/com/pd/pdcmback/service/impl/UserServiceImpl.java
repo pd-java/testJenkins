@@ -2,8 +2,10 @@ package com.pd.pdcmback.service.impl;
 
 import com.pd.pdcmback.entity.Role;
 import com.pd.pdcmback.entity.User;
+import com.pd.pdcmback.entity.UserCM;
 import com.pd.pdcmback.mapper.RoleMapper;
 import com.pd.pdcmback.mapper.RoleWithUserMapper;
+import com.pd.pdcmback.mapper.UserCMMapper;
 import com.pd.pdcmback.mapper.UserMapper;
 import com.pd.pdcmback.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserCMMapper userCMMapper;
 
     @Autowired
     private RoleWithUserMapper roleWithUserMapper;
@@ -88,5 +93,15 @@ public class UserServiceImpl implements UserService {
             }
         }
         return false;
+    }
+
+    @Override
+    public Integer updateUserPersonalData(User user) {
+        return userMapper.updateUserPersonalData(user);
+    }
+
+    @Override
+    public UserCM getUserPersonalData(String username) {
+        return userCMMapper.getUserPersonalData(username);
     }
 }

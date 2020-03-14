@@ -10,6 +10,12 @@
         <result column="job" property="job" jdbcType="VARCHAR"/>
         <result column="birth" property="birth" jdbcType="VARCHAR"/>
         <result column="enabled" property="enabled" jdbcType="BIT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="company" property="company" jdbcType="VARCHAR"/>
+        <result column="education" property="education" jdbcType="VARCHAR"/>
+        <result column="school" property="school" jdbcType="VARCHAR"/>
+        <result column="work_time" property="workTime" jdbcType="VARCHAR"/>
+        <result column="personal_profile" property="personalProfile" jdbcType="VARCHAR"/>
     </resultMap>
     <resultMap id="UserWithRoles" type="com.pd.pdcmback.entity.User" extends="BaseResultMap">
         <collection property="roles" ofType="com.pd.pdcmback.entity.Role">
@@ -70,5 +76,23 @@
         where
             id = #{userId}
 
+    </update>
+
+    <update id="updateUserPersonalData" parameterType="com.pd.pdcmback.entity.User">
+        update
+            user
+        set
+            name = #{name},
+            sex = #{sex},
+            sex = #{sex},
+            birth = #{birth},
+            job = #{job},
+            education = #{education},
+            school = #{school},
+            company = #{company},
+            work_time = #{workTime},
+            personal_profile = #{personalProfile}
+        where
+            username = #{username}
     </update>
 </mapper>
