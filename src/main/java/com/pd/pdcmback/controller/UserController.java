@@ -90,7 +90,8 @@ public class UserController {
 
     @RequestMapping("/registerCheckVerifyCode")
     public AjaxResponse registerCheckVerifyCode(){
-        return AjaxResponse.registerSuccess();
+        String msg = "验证码正确";
+        return AjaxResponse.registerSuccess(msg);
     }
 
     @RequestMapping("/register")
@@ -103,7 +104,7 @@ public class UserController {
                 return AjaxResponse.registerFailure(msg);
             }
         }
-        return AjaxResponse.registerSuccess();
+        return AjaxResponse.registerSuccess(user.getUsername());
     }
 
     @RequestMapping("/admin")

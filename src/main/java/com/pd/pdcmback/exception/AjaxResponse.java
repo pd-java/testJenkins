@@ -69,12 +69,12 @@ public class AjaxResponse {
         return ajaxResponse;
     }
 
-    public static AjaxResponse registerSuccess(){
+    public static AjaxResponse registerSuccess(String userName){
         AjaxResponse ajaxResponse = new AjaxResponse();
         ajaxResponse.setCode(StatusCode.REGISTER_SUCCESS);
         ajaxResponse.setIssuccess(true);
         ajaxResponse.setMessage("注册成功");
-        //ajaxResponse.setData("");
+        ajaxResponse.setData(userName);
         return ajaxResponse;
     }
 
