@@ -32,7 +32,7 @@ public class User implements UserDetails, Serializable {
 
     private String birth;
 
-    private Boolean enabled;
+    private boolean enabled;
 
     private String name;
 
@@ -121,7 +121,7 @@ public class User implements UserDetails, Serializable {
         return enabled;
     }
 
-    public Boolean getEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 

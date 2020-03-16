@@ -67,7 +67,10 @@ public class UserController {
     public AjaxResponse register(@RequestBody User user){
         System.out.println("registing ing ing");
         if(user != null && user.getUsername() != null && user.getPassword() != null){
-            Integer count = userService.insertUser(user);
+            Integer status = userService.insertUser(user);
+            if(status == -1){
+                return AjaxResponse.registerFailure();
+            }
         }
         return AjaxResponse.registerSuccess();
     }

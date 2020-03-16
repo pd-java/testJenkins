@@ -78,6 +78,15 @@ public class AjaxResponse {
         return ajaxResponse;
     }
 
+    public static AjaxResponse registerFailure(){
+        AjaxResponse ajaxResponse = new AjaxResponse();
+        ajaxResponse.setCode(StatusCode.REGISTER_FAIL);
+        ajaxResponse.setIssuccess(true);
+        ajaxResponse.setMessage("注册失败，用户名已存在");
+        //ajaxResponse.setData("");
+        return ajaxResponse;
+    }
+
     public static AjaxResponse getComponentByUuidSuccess(Component component){
         AjaxResponse ajaxResponse = new AjaxResponse();
         ajaxResponse.setCode(StatusCode.SELECT_COMPONENT_BY_KEY_SUCCESS);

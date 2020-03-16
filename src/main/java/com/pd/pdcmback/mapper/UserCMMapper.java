@@ -14,6 +14,9 @@ import java.util.Map;
 @Repository
 public interface UserCMMapper {
 
+    //检验用户是否重复
+    UserCM selectUserByUserNameForCheckRepeat(String username);
+
     //通过用户名获取用户资料
     UserCM getUserPersonalData(String username);
 }

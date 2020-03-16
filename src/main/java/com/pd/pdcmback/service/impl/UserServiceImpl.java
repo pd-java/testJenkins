@@ -62,16 +62,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer insertUser(User user) {
-        //对密码加密
-        String pass = new BCryptPasswordEncoder().encode(user.getPassword());
-        user.setEnabled(true);
-        user.setPassword(pass);
-        Integer id = userMapper.insertUser(user);
-        Integer userId = user.getId();
-        Map<String,Object> map = new HashMap<>();
-        map.put("userId",userId);
-        roleWithUserMapper.insertUserWithUserRole(map);
-        return id;
+        //检验用户名是否重复
+        String username = user.getUsername();
+        UserCM userCheck = userCMMapper.selectUserByUserNameForCheckRepeat(username);
+        System.out.println("userCheck=");
+        System.out.println(userCheck);
+        if(userCheck != null) {
+            //用户名重复
+            return -1;
+        } else {
+            //对密码加密
+            String pass = new BCryptPasswordEncoder().encode(user.getPassword());
+            user.setEnabled(true);
+            user.setPassword(pass);
+            Integer id = userMapper.insertUser(user);
+            Integer userId = user.getId();
+            Map<String,Object> map = new HashMap<>();
+            map.put("userId",userId);
+            roleWithUserMapper.insertUserWithUserRole(map);
+            return id;
+        }
     }
 
     @Override
