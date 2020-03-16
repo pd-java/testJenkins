@@ -52,6 +52,8 @@ public class ComponentServiceImpl implements ComponentService {
         if(component.isComponentEnabled() != true){
             component = new Component();
         }
+        //增加浏览次数
+        componentMapper.updateComponentBrowseTimes(componentUuid,component.getComponentBrowseTimes() + 1);
         return component;
     }
 

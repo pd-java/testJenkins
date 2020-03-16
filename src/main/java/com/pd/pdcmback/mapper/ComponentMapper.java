@@ -3,6 +3,7 @@ package com.pd.pdcmback.mapper;
 import com.pd.pdcmback.entity.Component;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,6 +21,9 @@ public interface ComponentMapper {
     List<Component> selectComponentAll();
 
     Component selectComponentByUuid(String componentUuid);
+
+    @Update("update component set component_browse_times = #{componentBrowseTimes} where component_uuid_name = #{componentUuid}")
+    Integer updateComponentBrowseTimes(String componentUuid, Integer componentBrowseTimes);
 
     Integer insertComponent(Component component);
 
