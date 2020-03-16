@@ -88,13 +88,19 @@ public class UserController {
         return AjaxResponse.visitfailure();
     }
 
+    @RequestMapping("/registerCheckVerifyCode")
+    public AjaxResponse registerCheckVerifyCode(){
+        return AjaxResponse.registerSuccess();
+    }
+
     @RequestMapping("/register")
     public AjaxResponse register(@RequestBody User user){
         System.out.println("registing ing ing");
         if(user != null && user.getUsername() != null && user.getPassword() != null){
             Integer status = userService.insertUser(user);
             if(status == -1){
-                return AjaxResponse.registerFailure();
+                String msg = "注册失败，用户名已存在";
+                return AjaxResponse.registerFailure(msg);
             }
         }
         return AjaxResponse.registerSuccess();

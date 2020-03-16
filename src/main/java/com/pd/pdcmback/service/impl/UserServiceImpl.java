@@ -65,8 +65,6 @@ public class UserServiceImpl implements UserService {
         //检验用户名是否重复
         String username = user.getUsername();
         UserCM userCheck = userCMMapper.selectUserByUserNameForCheckRepeat(username);
-        System.out.println("userCheck=");
-        System.out.println(userCheck);
         if(userCheck != null) {
             //用户名重复
             return -1;

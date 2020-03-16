@@ -78,11 +78,11 @@ public class AjaxResponse {
         return ajaxResponse;
     }
 
-    public static AjaxResponse registerFailure(){
+    public static AjaxResponse registerFailure(String msg){
         AjaxResponse ajaxResponse = new AjaxResponse();
         ajaxResponse.setCode(StatusCode.REGISTER_FAIL);
         ajaxResponse.setIssuccess(true);
-        ajaxResponse.setMessage("注册失败，用户名已存在");
+        ajaxResponse.setMessage(msg);
         //ajaxResponse.setData("");
         return ajaxResponse;
     }

@@ -33,18 +33,6 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
             response.setContentType("application/json;charset-UTF-8");
             response.setHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
             response.setHeader("Access-Control-Allow-Credentials", "true");
-            /*String errormessage = "";
-            if (exception instanceof LockedException) {
-                errormessage = "账户被锁定，请联系管理员!";
-            } else if (exception instanceof CredentialsExpiredException) {
-                errormessage = "密码过期，请联系管理员!";
-            } else if (exception instanceof AccountExpiredException) {
-                errormessage = "账户过期，请联系管理员!";
-            } else if (exception instanceof DisabledException) {
-                errormessage = "账户被禁用，请联系管理员!";
-            } else if (exception instanceof BadCredentialsException) {
-                errormessage = "用户名或者密码输入错误，请重新输入!";
-            }*/
             response.getWriter().write(objectMapper.writeValueAsString(AjaxResponse.error()));
         }
         else{

@@ -35,6 +35,13 @@ public class VerifyCodeFilter extends OncePerRequestFilter {
                 myAuthenticationFailureHandler.onAuthenticationFailure(request,response,e);
                 return;
             }
+        } else if(request.getRequestURI().equals("/registerCheckVerifyCode")&&request.getMethod().equalsIgnoreCase("post")){
+            try {
+                validate(request);
+            } catch (VerifyCodeException e) {
+                myAuthenticationFailureHandler.onAuthenticationFailure(request,response,e);
+                return;
+            }
         }
         // 3. 校验通过，就放行
         filterChain.doFilter(request, response);
@@ -43,13 +50,12 @@ public class VerifyCodeFilter extends OncePerRequestFilter {
     /* 验证保存在session的验证码和表单提交的验证码是否一致 */
     private void validate(HttpServletRequest request) throws ServletRequestBindingException {
         String captcha = ServletRequestUtils.getStringParameter(request, "verifyCode");
-        String code = (String) request.getSession().getAttribute(request.getParameter("verfyUuid"));
+        String code = (String) request.getSession().getAttribute(request.getParameter("verifyUuid"));
         System.out.println("获取提交的code"+captcha);
         System.out.println("获取保存的code"+code);
         if(!code.equalsIgnoreCase(captcha)){
             throw new VerifyCodeException("验证码不正确！");
         }
         request.getSession().removeAttribute(request.getParameter("uuid"));
-        System.out.println("wod wod wod wod wod");
     }
 }
