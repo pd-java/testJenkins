@@ -214,7 +214,7 @@ public class AjaxResponse {
         AjaxResponse ajaxResponse = new AjaxResponse();
         ajaxResponse.setCode(StatusCode.LOGIN_FAIL);
         ajaxResponse.setIssuccess(false);
-        ajaxResponse.setMessage("登录失败，用户名或密码错误");
+        ajaxResponse.setMessage("登录失败，登录信息有误，请重新输入");
         //ajaxResponse.setData("");
         return ajaxResponse;
     }

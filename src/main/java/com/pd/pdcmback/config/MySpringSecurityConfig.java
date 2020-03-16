@@ -5,6 +5,7 @@ import com.pd.pdcmback.auth.MyAuthenticationFailureHandler;
 import com.pd.pdcmback.auth.MyAuthenticationLogoutSuccessHandler;
 import com.pd.pdcmback.auth.MyAuthenticationSuccessHandler;
 import com.pd.pdcmback.service.UserService;
+import com.pd.pdcmback.util.VerifyCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.annotation.Resource;
 
@@ -36,6 +38,9 @@ public class MySpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private MyAuthenticationLogoutSuccessHandler myAuthenticationLogoutSuccessHandler;
 
     @Resource
+    private VerifyCodeFilter verifyCodeFilter;
+
+    @Resource
     private MyAccessDeniedHandler myAccessDeniedHandler;
 
     @Bean
@@ -54,7 +59,7 @@ public class MySpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()//
-                .antMatchers("/","/getUserPersonalData","/personalDataSetting","/modifyPassword","/quitLogin","/deleteComponentFile","/deleteComponentPicture","/updateComponent","/deleteComponentByComponentId","/setPersonalComponentDisable","/getPersonalComponent","/getComponentBySearchKeyWords","/getHotComponents","/getComponentByCheckedComponentType","/login","/getComponentTypesAll","/uploadComponent","/getComponentType","/register","/import","/getBackMenu","/downloadComponent","/getComponentByUuid").permitAll()
+                .antMatchers("/","/getCode","/getUserPersonalData","/personalDataSetting","/modifyPassword","/quitLogin","/deleteComponentFile","/deleteComponentPicture","/updateComponent","/deleteComponentByComponentId","/setPersonalComponentDisable","/getPersonalComponent","/getComponentBySearchKeyWords","/getHotComponents","/getComponentByCheckedComponentType","/login","/getComponentTypesAll","/uploadComponent","/getComponentType","/register","/import","/getBackMenu","/downloadComponent","/getComponentByUuid").permitAll()
                 .and()
                 .authorizeRequests()
                     .antMatchers("/admin").hasAuthority("ROLE_ADMIN")
@@ -87,6 +92,9 @@ public class MySpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
         ;
+
+        /* 添加验证码过滤器 */
+        http.addFilterBefore(verifyCodeFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
 }

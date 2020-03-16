@@ -5,15 +5,25 @@ import com.pd.pdcmback.entity.Component;
 import com.pd.pdcmback.entity.ComponentType;
 import com.pd.pdcmback.entity.User;
 import com.pd.pdcmback.exception.AjaxResponse;
+import com.pd.pdcmback.exception.BaseResult;
 import com.pd.pdcmback.service.ComponentService;
 import com.pd.pdcmback.service.ComponentTypeService;
 import com.pd.pdcmback.service.UserService;
+import com.pd.pdcmback.util.ImgVO;
+import com.pd.pdcmback.util.ReturnCode;
+import com.pd.pdcmback.util.VerifyCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author pengdong
@@ -37,11 +47,26 @@ public class UserController {
     //@RequestMapping(value = "/",produces = {"application/json;charset=UTF-8"})
     @GetMapping(value = "/",produces = {"application/json;charset=UTF-8"})
     public AjaxResponse home(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize", defaultValue = "4") Integer pageSize){
-    //public AjaxResponse home(String pageNum, String pageSize){
-    //public AjaxResponse home(){
         System.out.println("wellcome home");
         PageInfo<Component> componentPageInfo = componentService.selectComponentAll(pageNum, pageSize);
         return AjaxResponse.home(componentPageInfo);
+    }
+
+    @GetMapping("/getCode")
+    public Object getCode(HttpServletRequest request) {
+        /* 生成验证码字符串 */
+        String verifyCode = VerifyCodeUtil.generateVerifyCode(4);
+        String uuid = UUID.randomUUID().toString().trim().replaceAll("-", "");
+        HttpSession session = request.getSession();
+        session.setAttribute(uuid,verifyCode);
+        int w = 111,h = 36;
+        try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
+            VerifyCodeUtil.outputImage(w, h, stream, verifyCode);
+            return new BaseResult(ReturnCode.SUCCESS.getCode(), ReturnCode.SUCCESS.getMessage(),new ImgVO("data:image/gif;base64,"+ Base64Utils.encodeToString(stream.toByteArray()),uuid));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     //获取组件所有类别（递归）
