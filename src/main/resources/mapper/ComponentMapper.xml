@@ -40,7 +40,28 @@
     </select>
 
     <select id="selectComponentBycheckedComponentType" resultMap="BaseResultMap">
-        select * from component where component_type = #{checkedComponentType}
+            select
+            *
+        from
+            component
+        where
+            id
+        in (
+            select
+                component_id
+            from
+                component_related_type
+            where
+                component_type_id = (
+	                select
+	                    id
+	                from
+	                    component_type
+	                where
+	                    type_name = #{checkedComponentType}
+	            )
+	    )
+
     </select>
 
     <select id="selectHotComponentByPreferTimes" parameterType="java.lang.Integer" resultMap="BaseResultMap">

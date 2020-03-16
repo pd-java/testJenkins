@@ -158,7 +158,6 @@ public class PersonalCenterController {
         return AjaxResponse.getUserPersonalDataSuccess(userCM);
     }
 
-
     @GetMapping(value = "/personalDataSetting")
     public AjaxResponse personalDataSetting(User user){
         userService.updateUserPersonalData(user);

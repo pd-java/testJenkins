@@ -51,8 +51,6 @@ public class VerifyCodeFilter extends OncePerRequestFilter {
     private void validate(HttpServletRequest request) throws ServletRequestBindingException {
         String captcha = ServletRequestUtils.getStringParameter(request, "verifyCode");
         String code = (String) request.getSession().getAttribute(request.getParameter("verifyUuid"));
-        System.out.println("获取提交的code"+captcha);
-        System.out.println("获取保存的code"+code);
         if(!code.equalsIgnoreCase(captcha)){
             throw new VerifyCodeException("验证码不正确！");
         }

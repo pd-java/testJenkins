@@ -124,6 +124,7 @@ public class ComponentServiceImpl implements ComponentService {
     public List<Component> deleteComponentByComponentId(Integer componentId) {
         //通过组件id删除组件
         componentMapper.deleteComponentByComponentId(componentId);
+        componentMapper.deleteComponentRelatedType(componentId);
         //重新查询出组件
         return componentMapper.selectPersonalComponent();
     }
