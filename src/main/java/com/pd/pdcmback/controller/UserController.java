@@ -8,6 +8,7 @@ import com.pd.pdcmback.exception.AjaxResponse;
 import com.pd.pdcmback.exception.BaseResult;
 import com.pd.pdcmback.service.ComponentService;
 import com.pd.pdcmback.service.ComponentTypeService;
+import com.pd.pdcmback.service.UserLikedComponentService;
 import com.pd.pdcmback.service.UserService;
 import com.pd.pdcmback.util.ImgVO;
 import com.pd.pdcmback.util.ReturnCode;
@@ -20,10 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author pengdong
@@ -43,6 +41,9 @@ public class UserController {
 
     @Autowired
     private ComponentTypeService componentTypeService;
+
+    @Autowired
+    private UserLikedComponentService userLikedComponentService;
 
     //@RequestMapping(value = "/",produces = {"application/json;charset=UTF-8"})
     @GetMapping(value = "/",produces = {"application/json;charset=UTF-8"})
@@ -147,6 +148,27 @@ public class UserController {
                                                      @RequestParam(value = "pageSize", defaultValue = "4") Integer pageSize){
         PageInfo<Component> components = componentService.selectComponentBySearchKeyWords(searchKeyWords, pageNum, pageSize);
         return AjaxResponse.getComponentBySearchKeyWordsSuccess(components);
+    }
+
+    @GetMapping("/insertUserLikedComponent")
+    public AjaxResponse insertUserLikedComponent(@RequestParam(value = "username") String username,
+                                                     @RequestParam(value = "componentId") Integer componentId){
+        Map map = new HashMap();
+        map.put("username",username);
+        map.put("componentId",componentId);
+        userLikedComponentService.insertUserLikedComponent(map);
+        return AjaxResponse.insertUserLikedComponentSuccess();
+    }
+
+
+    @GetMapping("/deleteUserLikedComponent")
+    public AjaxResponse deleteUserLikedComponent(@RequestParam(value = "username") String username,
+                                                     @RequestParam(value = "componentId") Integer componentId){
+        Map map = new HashMap();
+        map.put("username",username);
+        map.put("componentId",componentId);
+        userLikedComponentService.deleteUserLikedComponent(map);
+        return AjaxResponse.insertUserLikedComponentSuccess();
     }
 
 

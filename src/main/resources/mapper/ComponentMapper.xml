@@ -18,6 +18,7 @@
         <result column="component_prefer_times" property="componentPreferTimes" jdbcType="INTEGER"/>
         <result column="component_exhibition_address" property="componentExhibitionAddress" jdbcType="VARCHAR"/>
         <result column="component_download_address" property="componentDownloadAddress" jdbcType="VARCHAR"/>
+        <result column="component_isliked" property="componentIsliked" jdbcType="BIT"/>
     </resultMap>
     <resultMap id="ComponentRelatedType" type="com.pd.pdcmback.entity.Component" extends="BaseResultMap">
         <collection property="componentTypes" ofType="com.pd.pdcmback.entity.ComponentType">

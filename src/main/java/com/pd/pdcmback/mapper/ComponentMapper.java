@@ -49,4 +49,10 @@ public interface ComponentMapper {
     Integer deleteComponentRelatedType(Integer componentId);
 
     Integer updateComponent(Map<String,Object> map);
+
+    @Update("update component set component_prefer_times = component_prefer_times + 1 where id = #{componentId}")
+    Integer updateAddOneComponentPreferTimes(Integer componentId);
+
+    @Update("update component set component_prefer_times = component_prefer_times - 1 where id = #{componentId}")
+    Integer updateReduceOneComponentPreferTimes(Integer componentId);
 }

@@ -210,6 +210,22 @@ public class AjaxResponse {
         return ajaxResponse;
     }
 
+    public static AjaxResponse insertUserLikedComponentSuccess(){
+        AjaxResponse ajaxResponse = new AjaxResponse();
+        ajaxResponse.setCode(StatusCode.SUCCESS);
+        ajaxResponse.setIssuccess(true);
+        ajaxResponse.setMessage("添加喜欢组件成功");
+        return ajaxResponse;
+    }
+
+    public static AjaxResponse deleteUserLikedComponentSuccess(){
+        AjaxResponse ajaxResponse = new AjaxResponse();
+        ajaxResponse.setCode(StatusCode.SUCCESS);
+        ajaxResponse.setIssuccess(true);
+        ajaxResponse.setMessage("删除喜欢组件成功");
+        return ajaxResponse;
+    }
+
     public static AjaxResponse error(){
         AjaxResponse ajaxResponse = new AjaxResponse();
         ajaxResponse.setCode(StatusCode.LOGIN_FAIL);

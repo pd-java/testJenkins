@@ -45,4 +45,6 @@ public class Component {
 
     private ComponentType componentTypes;     //组件含有的各种类型
 
+    private boolean componentIsliked;     //组件是否被喜欢
+
 }
