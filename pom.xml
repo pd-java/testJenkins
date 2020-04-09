@@ -11,6 +11,7 @@
     <groupId>com.pd</groupId>
     <artifactId>pdcmback</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>pdcmback</name>
     <description>Demo project for Spring Boot</description>
 
@@ -31,6 +32,13 @@
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.1.1</version>
+        </dependency>
+
+        <!-- 打包尘gwar后避免和tamcat冲突 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

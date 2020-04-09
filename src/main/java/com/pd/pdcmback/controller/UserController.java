@@ -53,6 +53,19 @@ public class UserController {
         return AjaxResponse.home(componentPageInfo);
     }
 
+    /**
+     * 登录后进入主页对点过喜欢的组件进行显红
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GetMapping(value = "/home",produces = {"application/json;charset=UTF-8"})
+    public AjaxResponse logedHome(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize", defaultValue = "4") Integer pageSize){
+        System.out.println("wellcome home");
+        PageInfo<Component> componentPageInfo = componentService.selectComponentAll(pageNum, pageSize);
+        return AjaxResponse.home(componentPageInfo);
+    }
+
     @GetMapping("/getCode")
     public Object getCode(HttpServletRequest request) {
         /* 生成验证码字符串 */

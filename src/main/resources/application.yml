@@ -1,18 +1,14 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/pdcm?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=CST
+    url: jdbc:mysql://8.129.183.247:3306/pdcm?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=CST
     username: root
-    password: 123456pd
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   security:
     loginType: JSON
   profiles:
     include: configuredata
-#  jpa:
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        format_sql: true
+
 server:
   port: 8081
 mybatis:
